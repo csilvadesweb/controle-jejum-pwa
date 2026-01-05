@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8">
+  <title>Controle de Jejum</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <!-- PWA -->
+  <link rel="manifest" href="manifest.json">
+  <meta name="theme-color" content="#111">
+  <link rel="apple-touch-icon" href="icon.png">
+
+  <link rel="stylesheet" href="style.css">
+  <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+</head>
+<body>
+
+<div id="loginBox" class="login">
+  <h2>Entrar</h2>
+  <input type="text" id="nome" placeholder="Seu nome">
+  <button onclick="login()">Acessar</button>
+</div>
+
+<div class="container hidden" id="app">
+
+  <header>
+    <h1>Controle de Jejum</h1>
+    <button onclick="toggleDark()">🌙</button>
+  </header>
+
+  <!-- DASHBOARD -->
+  <section class="dashboard">
+    <div class="card">
+      <h3>Peso Atual</h3>
+      <span id="pesoAtual">--</span>
+    </div>
+    <div class="card">
+      <h3>Status</h3>
+      <span id="statusAtual">--</span>
+    </div>
+    <div class="card">
+      <h3>Evolução</h3>
+      <span id="evolucao">--</span>
+    </div>
+  </section>
+
+  <!-- FORM -->
+  <section class="form">
+    <input type="date" id="data">
+    <input type="number" id="peso" step="0.1" placeholder="Peso (kg)">
+    <select id="jejum">
+      <option>Jejum cumprido</option>
+      <option>Jejum não cumprido</option>
+    </select>
+    <button onclick="adicionar()">Adicionar</button>
+  </section>
+
+  <!-- TABELA -->
+  <table>
+    <thead>
+      <tr>
+        <th>Data</th>
+        <th>Peso</th>
+        <th>Jejum</th>
+        <th>Variação</th>
+        <th>Status</th>
+      </tr>
+    </thead>
+    <tbody id="tabela"></tbody>
+  </table>
+
+  <button class="export" onclick="exportar()">📥 Exportar CSV</button>
+
+  <!-- GRÁFICO -->
+  <canvas id="grafico"></canvas>
+
+</div>
+
+<script src="script.js"></script>
+
+<script>
+  if ("serviceWorker" in navigator) {
+    navigator.serviceWorker.register("sw.js");
+  }
+</script>
+
+</body>
+</html>
